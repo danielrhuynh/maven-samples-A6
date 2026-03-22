@@ -7,16 +7,10 @@ pipeline {
       }
     }
 
-    stage('run') {
-      steps {
-        sh 'mvn verify'
-      }
-    }
-
     stage('bisect') {
       steps {
-        sh 'git bisect start <bad-hash> <good-hash>'
-        sh 'git bisect run mvn test'
+        sh 'git bisect start <bad-commit-hash> <good-commit-hash>'
+        sh 'git bisect run mvn clean test'
       }
     }
 
